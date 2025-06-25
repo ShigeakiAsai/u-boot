@@ -541,9 +541,13 @@ int board_late_init(void)
 	status |= !lmb_alloc(SZ_4M, &addr) ?
 		env_set_hex("pxefile_addr_r", addr) : 1;
 
-	if (IS_ENABLED(CONFIG_FASTBOOT))
+	if (IS_ENABLED(CONFIG_FASTBOOT)) {
 		status |= !lmb_alloc(FASTBOOT_BUF_SIZE, &addr) ?
 			env_set_hex("fastboot_addr_r", addr) : 1;
+		/* override loadaddr for memory rich soc */
+		status |= !lmb_alloc(SZ_128M, &addr) ?
+			env_set_hex("loadaddr", addr) : 1;
+	}
 
 	fdt_status |= !lmb_alloc(SZ_2M, &addr) ?
 		env_set_hex("fdt_addr_r", addr) : 1;
