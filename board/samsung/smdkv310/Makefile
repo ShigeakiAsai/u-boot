@@ -3,8 +3,8 @@
 # Copyright (C) 2011 Samsung Electronics
 
 ifdef CONFIG_XPL_BUILD
-# necessary to create built-in.a
-obj- := __dummy__.a
+# necessary to create built-in.o
+obj- := __dummy__.o
 
 hostprogs-y := tools/mksmdkv310spl
 always := $(hostprogs-y)
